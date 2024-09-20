@@ -1,5 +1,8 @@
-const socket = io('http://localhost:3000');
+const serverIp = config.serverIp;
+const serverPort = config.serverPort;
+const serverProtocol = config.serverProtocol
 
+const socket = io(serverProtocol + '://' + serverIp + ':' + serverPort);
 
 const login = () => {
     const username = document.getElementById('loginUsername').value;
