@@ -1,5 +1,5 @@
 var config = {
-    serverProtocol: 'https',
+    serverProtocol: 'http',
     serverIp: '13.60.157.117',
     serverPort: 3001
 };
