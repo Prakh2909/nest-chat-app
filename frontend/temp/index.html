@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Chat App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="chat-container">
+  <h2>Chat App</h2>
+
+  <div class="section">
+    <label for="username">Username:</label>
+    <input type="text" id="username" placeholder="Enter username">
+    <button id="setUsernameButton">Set Username</button>
+    <p id="errorMessage" style="color: red; display: none;"></p> <!-- Error message element -->
+  </div>
+
+  <div class="section">
+    <label for="group">Group:</label>
+    <input type="text" id="group" placeholder="Enter group name">
+    <button id="joinGroupButton">Join Group</button>
+  </div>
+
+  <div id="messages"></div>
+
+  <div class="section">
+    <input type="text" id="messageInput" placeholder="Type your message...">
+    <button id="sendGroupMessageButton">Send Group Message</button>
+  </div>
+
+  <div class="section">
+    <label for="recipient">Recipient:</label>
+    <input type="text" id="recipient" placeholder="Enter recipient's username">
+    <button id="sendPrivateMessageButton">Send Private Message</button>
+  </div>
+</div>
+
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+<script src="index.js"></script>
+
+</body>
+</html>
