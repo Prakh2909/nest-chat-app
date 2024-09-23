@@ -27,12 +27,14 @@ export class ChatGateway {
 
   @SubscribeMessage('loginUsername')
   handleLoginUsername(@MessageBody() data: { username: string; password: string }, @ConnectedSocket() client: Socket): void {
-    const welcomeMessage = this.userService.loginUser(data.username, client);
-    if (welcomeMessage) {
-      client.emit('LoginSuccess', welcomeMessage);
+    const { message, status } = this.userService.loginUser(data.username, client);
+    if (status) {
+      client.emit('LoginSuccess', message);
     } else {
-      client.emit('LoginFailure', 'User Not Found');
+      client.emit('LoginFailure', message);
     }
+    
+
   }
 
   @SubscribeMessage('signUpUsername')
@@ -43,6 +45,11 @@ export class ChatGateway {
     } else {
       client.emit('SignUpFailure', 'User Already Exist');
     }
+  }
+
+  @SubscribeMessage('logoutUsername')
+  handleLogoutUsername(@MessageBody() data: { username: string; }): void {
+    const welcomeMessage = this.userService.logoutUsername(data.username);
   }
 
   @SubscribeMessage('joinGroup')

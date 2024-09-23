@@ -58,3 +58,4 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 frontend/node_modules
 /frontend-server
+config.js

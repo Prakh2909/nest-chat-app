@@ -68,7 +68,7 @@ function showChatOptions(username) {
 <h2>Select Chat Option</h2>
 <button onclick="startPrivateChatId('${username}')">Start Private Chat</button>
 <button onclick="joinGroupChatId('${username}')">Join Group Chat</button>
-<p><span class="link" onclick="showLogin()">Log out</span></p>
+<p><span class="link" onclick="logout('${username}')">Log out</span></p>
 `;
 }
 
@@ -80,6 +80,7 @@ function startPrivateChatId(username) {
   <input type="text" id="targetId" placeholder="Enter Username...">
   <button onclick="startPrivateChat('${username}')">Start</button>
   <p><span class="link" onclick="showChatOptions('${username}')">Go Back</span></p>
+  <p><span class="link" onclick="logout('${username}')">Log out</span></p>
 </div>
 `;
 }
@@ -95,6 +96,7 @@ function startPrivateChat(username) {
   <button onclick="sendPrivateMessage('${username}')">Send</button>
   <button id="loadChatHistoryButton" onclick="loadChatHistory('${username}','${targetId}')">Load Chat History</button>
   <p><span class="link" onclick="startPrivateChatId('${username}')">Go Back</span>
+  <p><span class="link" onclick="logout('${username}')">Log out</span></p>
 </div>
 `;
 }
@@ -114,6 +116,11 @@ function loadChatHistory(username, targetId) {
 
 }
 
+function logout(username) {
+    socket.emit('logoutUsername', { username });
+    showLogin();
+}
+
 function joinGroupChatId(username) {
     document.body.innerHTML = `
 <div class="chat-room">
@@ -122,6 +129,7 @@ function joinGroupChatId(username) {
   <input type="text" id="groupTargetId" placeholder="Enter Group Id...">
   <button onclick="joinGroupChat('${username}')">Start</button>
   <p><span class="link" onclick="showChatOptions('${username}')">Go Back</span></p>
+  <p><span class="link" onclick="logout('${username}')">Log out</span></p>
 </div>
 `;
 }
@@ -135,6 +143,7 @@ function joinGroupChat(username) {
   <input type="text" id="groupMessageInput" placeholder="Type your message">
   <button onclick="sendGroupMessage('${username}')">Send</button>
   <p><span class="link" onclick="joinGroupChatId('${username}')">Go Back</span></p>
+  <p><span class="link" onclick="logout('${username}')">Log out</span></p>
 </div>
 `;
     socket.emit('joinGroup', { groupTargetId, sender: username })
